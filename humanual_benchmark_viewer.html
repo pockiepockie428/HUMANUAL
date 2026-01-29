@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUMANUAL Benchmark | Data Examples</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F5F5F5;
+            --bg-card: #FFFFFF;
+            --text-primary: #1A1A1A;
+            --text-secondary: #4A4A4A;
+            --text-muted: #6B6B6B;
+            --accent-news: #CC0000;
+            --accent-book: #FF9900;
+            --accent-opinion: #FF4500;
+            --accent-politics: #1A8917;
+            --accent-chat: #5436DA;
+            --accent-email: #0078D4;
+            --border: #E0E0E0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+        header { padding: 60px 0 40px; text-align: center; border-bottom: 1px solid var(--border); }
+
+        .badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            background: var(--bg-secondary);
+            padding: 6px 14px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .tabs-container {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-primary);
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 48px;
+        }
+
+        .tabs { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+
+        .tab {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 10px 16px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.15s ease;
+        }
+
+        .tab:hover { background: var(--bg-secondary); color: var(--text-primary); }
+        .tab.active { background: var(--text-primary); color: white; border-color: var(--text-primary); }
+
+        .tab .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .tab[data-dataset="news"] .dot { background: var(--accent-news); }
+        .tab[data-dataset="book"] .dot { background: var(--accent-book); }
+        .tab[data-dataset="opinion"] .dot { background: var(--accent-opinion); }
+        .tab[data-dataset="politics"] .dot { background: var(--accent-politics); }
+        .tab[data-dataset="chat"] .dot { background: var(--accent-chat); }
+        .tab[data-dataset="email"] .dot { background: var(--accent-email); }
+
+        .dataset-section { display: none; animation: fadeIn 0.3s ease; padding-bottom: 60px; }
+        .dataset-section.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .example-divider {
+            text-align: center;
+            margin: 48px 0;
+            position: relative;
+        }
+
+        .example-divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .example-divider span {
+            background: var(--bg-primary);
+            padding: 0 16px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            position: relative;
+        }
+
+        /* ==================== NEWS - YouTube Style ==================== */
+        .news-container { max-width: 800px; margin: 0 auto; }
+
+        .video-player {
+            background: #0f0f0f;
+            border-radius: 12px;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-player-inner { text-align: center; color: white; }
+
+        .play-button {
+            width: 68px;
+            height: 48px;
+            background: #FF0000;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .play-button svg { fill: white; width: 24px; height: 24px; margin-left: 4px; }
+
+        .video-title-overlay { font-size: 13px; opacity: 0.9; max-width: 380px; }
+
+        .video-meta { display: flex; gap: 12px; padding: 14px 0; align-items: flex-start; }
+
+        .channel-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #BB1919 0%, #FF0000 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .video-info h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; line-height: 1.3; }
+
+        .video-stats { font-size: 12px; color: var(--text-muted); }
+        .video-stats span { margin-right: 6px; }
+
+        .transcript-box {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 14px;
+            margin: 16px 0;
+        }
+
+        .transcript-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .transcript-content {
+            font-size: 13px;
+            line-height: 1.65;
+            color: var(--text-secondary);
+        }
+
+        .expandable-content {
+            max-height: 100px;
+            overflow: hidden;
+            position: relative;
+            transition: max-height 0.3s ease;
+        }
+
+        .expandable-content.expanded {
+            max-height: none;
+        }
+
+        .expandable-content:not(.expanded)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(transparent, var(--bg-secondary));
+            pointer-events: none;
+        }
+
+        .expand-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 8px;
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .expand-btn:hover {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .expand-btn .arrow {
+            transition: transform 0.2s ease;
+        }
+
+        .expand-btn.expanded .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Book description expandable */
+        .book-description {
+            font-size: 13px;
+            line-height: 1.65;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            padding: 14px;
+            background: #F7F7F7;
+            border-radius: 6px;
+        }
+
+        .book-description .expandable-content:not(.expanded)::after {
+            background: linear-gradient(transparent, #F7F7F7);
+        }
+
+        /* Persona expandable */
+        .persona-tag {
+            display: block;
+            background: #FEF9E7;
+            border: 1px solid #F7DC6F;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #7D6608;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .persona-tag .expandable-content:not(.expanded)::after {
+            background: linear-gradient(transparent, #FEF9E7);
+        }
+
+        .reviewer-persona {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 14px;
+            background: #FEF9E7;
+            border: 1px solid #F7DC6F;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+
+        .reviewer-persona .expandable-content:not(.expanded)::after {
+            background: linear-gradient(transparent, #FEF9E7);
+        }
+
+        .comments-section {
+            margin-top: 20px;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .comments-header { font-size: 14px; font-weight: 600; margin-bottom: 20px; }
+
+        .comment-input-area { display: flex; gap: 12px; margin-bottom: 24px; }
+
+        .commenter-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .comment-input-wrapper { flex: 1; }
+
+        .persona-tag {
+            display: block;
+            background: #FEF9E7;
+            border: 1px solid #F7DC6F;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #7D6608;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .persona-tag strong { color: #5D4E06; }
+
+        .comment-input {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid var(--border);
+            padding: 8px 0;
+            font-size: 13px;
+            background: transparent;
+        }
+
+        .ground-truth-box {
+            display: flex;
+            gap: 12px;
+            background: #FEF2F2;
+            border: 1px solid #FECACA;
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-news);
+        }
+
+        .ground-truth-box .comment-content { flex: 1; }
+
+        .ground-truth-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #B91C1C;
+            margin-bottom: 6px;
+        }
+
+        .comment-text { font-size: 13px; line-height: 1.55; }
+
+        .comment-actions {
+            display: flex;
+            gap: 14px;
+            margin-top: 10px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .comment-actions span { display: flex; align-items: center; gap: 4px; }
+
+        /* ==================== BOOK - Amazon Style ==================== */
+        .book-container { max-width: 900px; margin: 0 auto; }
+
+        .amazon-header {
+            background: #131921;
+            padding: 10px 16px;
+            border-radius: 6px 6px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .amazon-logo { color: #FF9900; font-weight: 700; font-size: 22px; letter-spacing: -0.5px; }
+        .amazon-logo span { color: white; }
+
+        .amazon-search { flex: 1; display: flex; max-width: 400px; }
+
+        .amazon-search input {
+            flex: 1;
+            padding: 7px 10px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 13px;
+        }
+
+        .amazon-search button {
+            background: #FEBD69;
+            border: none;
+            padding: 7px 14px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .book-product-card {
+            background: white;
+            border: 1px solid #DDD;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+
+        .book-layout { display: grid; grid-template-columns: 160px 1fr; gap: 24px; }
+
+        .book-cover {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            aspect-ratio: 2/3;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            text-align: center;
+            color: white;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.25);
+        }
+
+        .book-cover-title {
+            font-family: 'Merriweather', serif;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .book-cover-author { font-size: 10px; opacity: 0.8; }
+
+        .book-details h3 { font-size: 18px; font-weight: 400; margin-bottom: 4px; }
+
+        .book-author-link {
+            color: #007185;
+            font-size: 13px;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .book-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+        .stars { color: #FFA41C; font-size: 14px; }
+        .rating-count { font-size: 13px; color: #007185; }
+
+        .book-description {
+            font-size: 13px;
+            line-height: 1.65;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            padding: 14px;
+            background: #F7F7F7;
+            border-radius: 6px;
+        }
+
+        .review-section { border-top: 1px solid #DDD; margin-top: 20px; padding-top: 20px; }
+        .review-section h4 { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+
+        .reviewer-persona {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: #FEF9E7;
+            border: 1px solid #F7DC6F;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+
+        .reviewer-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF9900 0%, #FEBD69 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .reviewer-info { font-size: 12px; color: #7D6608; }
+        .reviewer-info strong { display: block; color: #5D4E06; }
+
+        .ground-truth-review {
+            background: #FFF7ED;
+            border: 1px solid #FED7AA;
+            border-left: 4px solid #FF9900;
+            padding: 16px;
+            border-radius: 6px;
+        }
+
+        .ground-truth-review .ground-truth-label { color: #C2410C; }
+
+        .review-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+        .review-title { font-weight: 600; font-size: 14px; }
+
+        .verified-badge {
+            background: #067D62;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .review-text { font-size: 13px; line-height: 1.65; }
+
+        /* ==================== OPINION - Reddit Style ==================== */
+        .reddit-container { max-width: 640px; margin: 0 auto; }
+
+        .reddit-post-card {
+            background: #1A1A1B;
+            border: 1px solid #343536;
+            border-radius: 6px;
+            color: #D7DADC;
+            overflow: hidden;
+        }
+
+        .reddit-header-bar {
+            background: #FF4500;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reddit-logo { display: flex; align-items: center; gap: 8px; color: white; }
+
+        .reddit-icon {
+            width: 28px;
+            height: 28px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reddit-icon svg { width: 20px; height: 20px; fill: #FF4500; }
+        .reddit-wordmark { font-weight: 700; font-size: 16px; }
+        .subreddit-name { font-size: 13px; opacity: 0.9; }
+
+        .reddit-post { display: flex; }
+
+        .vote-column {
+            width: 36px;
+            padding: 10px 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            background: #161617;
+        }
+
+        .vote-btn {
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #818384;
+            cursor: pointer;
+            border-radius: 2px;
+            font-size: 12px;
+        }
+
+        .vote-btn:hover { background: #272729; color: #FF4500; }
+        .vote-count { font-size: 11px; font-weight: 700; color: #D7DADC; }
+
+        .post-content { flex: 1; padding: 10px 14px; }
+
+        .post-meta { font-size: 11px; color: #818384; margin-bottom: 6px; }
+        .post-meta a { color: #D7DADC; text-decoration: none; }
+        .post-meta a:hover { text-decoration: underline; }
+
+        .post-title-reddit { font-size: 16px; font-weight: 500; margin-bottom: 10px; line-height: 1.4; }
+
+        .post-body { font-size: 13px; line-height: 1.55; color: #D7DADC; }
+
+        .post-actions { display: flex; gap: 6px; margin-top: 10px; padding-top: 6px; }
+
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #818384;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 6px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .post-action:hover { background: #272729; }
+
+        .reddit-comments { border-top: 1px solid #343536; padding: 14px; }
+
+        .reddit-comment { display: flex; margin-bottom: 14px; }
+
+        .comment-thread-line { width: 18px; display: flex; justify-content: center; padding-top: 6px; }
+        .thread-line { width: 2px; background: #343536; height: 100%; }
+
+        .reddit-comment-content { flex: 1; padding-left: 8px; }
+
+        .reddit-comment-meta { font-size: 11px; color: #818384; margin-bottom: 4px; }
+        .reddit-comment-meta .author { color: #D7DADC; font-weight: 500; }
+
+        .reddit-comment-text { font-size: 13px; line-height: 1.5; }
+
+        .reddit-user-comment {
+            background: linear-gradient(135deg, rgba(255,69,0,0.1) 0%, rgba(255,69,0,0.05) 100%);
+            border: 1px solid rgba(255,69,0,0.3);
+            border-radius: 6px;
+            padding: 14px;
+            margin-top: 14px;
+        }
+
+        .reddit-persona-tag {
+            display: block;
+            background: #FEF9E7;
+            border: 1px solid #F7DC6F;
+            padding: 8px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: #7D6608;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .ground-truth-reddit {
+            background: linear-gradient(135deg, rgba(255,69,0,0.15) 0%, rgba(255,69,0,0.08) 100%);
+            border-left: 4px solid #FF4500;
+            padding: 10px 14px;
+            border-radius: 4px;
+        }
+
+        .ground-truth-reddit .ground-truth-label { color: #FF4500; }
+
+        /* ==================== POLITICS - Medium Style ==================== */
+        .medium-container { max-width: 620px; margin: 0 auto; }
+
+        .medium-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 32px;
+        }
+
+        .medium-logo {
+            font-family: 'Source Serif 4', serif;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .medium-nav { display: flex; gap: 20px; font-size: 13px; color: var(--text-secondary); }
+
+        .medium-article { margin-bottom: 32px; }
+        .medium-article-header { margin-bottom: 28px; }
+
+        .medium-article-title {
+            font-family: 'Source Serif 4', serif;
+            font-size: 34px;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.3px;
+            margin-bottom: 12px;
+        }
+
+        .medium-article-subtitle {
+            font-family: 'Source Serif 4', serif;
+            font-size: 20px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        .medium-author-row { display: flex; align-items: center; gap: 10px; margin-top: 24px; }
+
+        .medium-author-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1A8917 0%, #2ECC71 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .medium-author-info { font-size: 13px; }
+        .medium-author-name { font-weight: 500; color: var(--text-primary); }
+        .medium-article-meta { color: var(--text-muted); font-size: 12px; }
+
+        .medium-article-body {
+            font-family: 'Source Serif 4', serif;
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        .medium-article-body p { margin-bottom: 20px; }
+
+        .medium-responses {
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+            margin-top: 40px;
+        }
+
+        .medium-responses h4 { font-size: 18px; font-weight: 600; margin-bottom: 20px; }
+
+        .medium-persona-tag {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px;
+            background: #FEF9E7;
+            border: 1px solid #F7DC6F;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+
+        .medium-persona-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .medium-persona-text { flex: 1; font-size: 12px; color: #7D6608; line-height: 1.5; }
+
+        .ground-truth-medium {
+            background: #ECFDF5;
+            border: 1px solid #A7F3D0;
+            border-left: 4px solid var(--accent-politics);
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .ground-truth-medium .ground-truth-label { color: var(--accent-politics); }
+
+        .medium-response-text {
+            font-family: 'Source Serif 4', serif;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* ==================== CHAT - Messaging Style ==================== */
+        .chat-container { max-width: 440px; margin: 0 auto; }
+
+        .chat-window {
+            background: #F2F2F7;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+        }
+
+        .chat-header-bar {
+            background: #F9F9F9;
+            padding: 14px 18px;
+            text-align: center;
+            border-bottom: 1px solid #E5E5EA;
+        }
+
+        .chat-header-bar h3 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+        .chat-header-bar span { font-size: 11px; color: var(--text-muted); }
+
+        .chat-messages { padding: 18px; min-height: 360px; }
+
+        .chat-message { display: flex; margin-bottom: 6px; align-items: flex-end; }
+        .chat-message.user { justify-content: flex-end; }
+        .chat-message.assistant { justify-content: flex-start; }
+
+        .chat-bubble {
+            max-width: 78%;
+            padding: 9px 14px;
+            border-radius: 18px;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        .chat-message.user .chat-bubble {
+            background: #007AFF;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-message.assistant .chat-bubble {
+            background: #E9E9EB;
+            color: var(--text-primary);
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-timestamp {
+            text-align: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            margin: 14px 0;
+        }
+
+        .chat-ground-truth {
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 2px dashed #C7C7CC;
+        }
+
+        .chat-ground-truth-label {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .chat-ground-truth-label span {
+            background: #FEF9E7;
+            border: 1px solid #F7DC6F;
+            padding: 5px 12px;
+            border-radius: 100px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #7D6608;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .chat-ground-truth .chat-bubble {
+            background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%);
+            color: #3730A3;
+            border: 2px solid #818CF8;
+        }
+
+        .chat-no-persona {
+            text-align: center;
+            padding: 8px 14px;
+            margin-bottom: 10px;
+            background: rgba(0,0,0,0.04);
+            border-radius: 10px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* ==================== EMAIL - Outlook Style ==================== */
+        .email-container { max-width: 820px; margin: 0 auto; }
+
+        .outlook-window {
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .outlook-toolbar {
+            background: #0078D4;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .outlook-logo { display: flex; align-items: center; gap: 8px; color: white; font-weight: 600; font-size: 14px; }
+        .outlook-logo svg { width: 20px; height: 20px; fill: white; }
+
+        .outlook-tabs { display: flex; gap: 4px; margin-left: 20px; }
+
+        .outlook-tab {
+            padding: 5px 12px;
+            color: rgba(255,255,255,0.8);
+            font-size: 12px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .outlook-tab.active { background: rgba(255,255,255,0.2); color: white; }
+
+        .outlook-body { display: flex; min-height: 400px; }
+
+        .outlook-sidebar {
+            width: 180px;
+            background: #F3F2F1;
+            border-right: 1px solid #E1DFDD;
+            padding: 10px;
+        }
+
+        .folder-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 10px;
+            border-radius: 3px;
+            font-size: 13px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .folder-item:hover { background: #E1DFDD; }
+        .folder-item.active { background: #E1DFDD; font-weight: 600; }
+        .folder-icon { width: 18px; text-align: center; font-size: 12px; }
+
+        .outlook-main { flex: 1; display: flex; flex-direction: column; }
+
+        .email-thread-header { padding: 16px 20px; border-bottom: 1px solid #E1DFDD; }
+        .email-subject { font-size: 16px; font-weight: 600; margin-bottom: 3px; }
+        .email-participants { font-size: 12px; color: var(--text-muted); }
+
+        .email-thread-content { flex: 1; padding: 16px 20px; overflow-y: auto; }
+
+        .email-message {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #F3F2F1;
+        }
+
+        .email-message:last-child { border-bottom: none; }
+
+        .email-message-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
+
+        .email-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .email-avatar.sender1 { background: linear-gradient(135deg, #0078D4 0%, #00BCF2 100%); }
+        .email-avatar.sender2 { background: linear-gradient(135deg, #5436DA 0%, #8B5CF6 100%); }
+
+        .email-sender-info { flex: 1; }
+        .email-sender-name { font-weight: 600; font-size: 13px; }
+        .email-sender-address { font-size: 11px; color: var(--text-muted); }
+
+        .email-timestamp { font-size: 11px; color: var(--text-muted); }
+
+        .email-body-text { font-size: 13px; line-height: 1.65; padding-left: 46px; }
+
+        .email-ground-truth {
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+            border-left: 4px solid var(--accent-email);
+            padding: 16px;
+            border-radius: 6px;
+            margin-top: 16px;
+        }
+
+        .email-ground-truth .ground-truth-label { color: var(--accent-email); }
+
+        .email-persona-box {
+            background: #FEF9E7;
+            border: 1px solid #F7DC6F;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin-bottom: 14px;
+            font-size: 12px;
+            color: #7D6608;
+            line-height: 1.5;
+        }
+
+        .email-persona-box strong { color: #5D4E06; }
+
+        footer {
+            text-align: center;
+            padding: 48px 0;
+            color: var(--text-muted);
+            font-size: 13px;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            header { padding: 40px 0 30px; }
+            h1 { font-size: 36px; }
+            .book-layout { grid-template-columns: 1fr; }
+            .book-cover { max-width: 160px; margin: 0 auto; }
+            .outlook-sidebar { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="badge">Benchmark Dataset</div>
+            <h1>HUMANUAL</h1>
+            <p class="subtitle">The HUMANUAL benchmark consists of six datasets drawn from publicly available sources with rich, real user profiles. It spans over 26k users worldwide and 216k diverse responses on 66k topics.</p>
+        </header>
+    </div>
+
+    <div class="tabs-container">
+        <div class="container">
+            <nav class="tabs">
+                <button class="tab active" data-dataset="news"><span class="dot"></span>News</button>
+                <button class="tab" data-dataset="book"><span class="dot"></span>Book</button>
+                <button class="tab" data-dataset="opinion"><span class="dot"></span>Opinion</button>
+                <button class="tab" data-dataset="politics"><span class="dot"></span>Politics</button>
+                <button class="tab" data-dataset="chat"><span class="dot"></span>Chat</button>
+                <button class="tab" data-dataset="email"><span class="dot"></span>Email</button>
+            </nav>
+        </div>
+    </div>
+
+    <main class="container">
+        <!-- ==================== NEWS DATASET ==================== -->
+        <section class="dataset-section active" data-dataset="news">
+            <div class="news-container">
+                <!-- Example 1 -->
+                <div class="video-player">
+                    <div class="video-player-inner">
+                        <div class="play-button">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <div class="video-title-overlay">Scotland first in world to make period products free - BBC News</div>
+                    </div>
+                </div>
+
+                <div class="video-meta">
+                    <div class="channel-avatar">BBC</div>
+                    <div class="video-info">
+                        <h3>Scotland first in world to make period products free - BBC News</h3>
+                        <div class="video-stats">
+                            <span>BBC News</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transcript-box">
+                    <div class="transcript-header">📄 Transcript</div>
+                    <div class="transcript-content expandable-content" id="transcript-1">
+                        Scotland has become the first country in the world to make female sanitary products free it means the authorities have a legal duty to ensure items such as tampons and sanitary pads are available without charge to anyone who needs them. An historic vote years in the making the result of the vote on motion 20328 in the name of monica lennon is yes 121 there were no votes against there were no abstentions the motion is agreed and the period products free provision scotland bill is passed. Monica Lennon seeing out her vision with Scotland becoming the first country in the world to make period products free for anyone who needs them. Menstruation is normal free universal access to tampons pads and reusable options should be normal too period dignity for all isn't radical or extreme it's simply the right thing to do. Period poverty is an issue the world over women in both impoverished nations as well as those in developed countries unable to afford suitable sanitary products resorting to toilet paper socks and even newspaper it affects self-esteem and even keeps girls from school having a significant impact on their education. I think we've seen admiration of Scotland um i think that it shows and will lead the rest of the world into how we look at menstruation even the conversations around menstruation i think it's fabulous obviously there is still a lot of stigma attached lots of people don't like to talk about it as an issue generally let alone the fact of period poverty. Period poverty is multi-pronged so we look at period poverty and while we can give access to sanitary items we also need to remove the shame and stigma around menstruation we also need to educate so that our girls and our boys are learning about menstruation in the way that they can hear it take it in and remove the shame and stigma around it the benchmark now set and ready for the rest of the world to meet.
+                    </div>
+                    <button class="expand-btn" onclick="toggleExpand('transcript-1', this)">
+                        <span>Show more</span>
+                        <span class="arrow">▼</span>
+                    </button>
+                </div>
+
+                <div class="comments-section">
+                    <div class="comments-header">💬 Comments</div>
+                    
+                    <div class="comment-input-area">
+                        <div class="commenter-avatar">UK</div>
+                        <div class="comment-input-wrapper">
+                            <div class="persona-tag">
+                                <strong>👤 User Persona:</strong>
+                                <div class="expandable-content" id="persona-news-1">
+                                    <strong>Demographics:</strong> UK-based, British nationality, previously resided in Japan.<br><br>
+                                    <strong>Interests:</strong> UK politics and Brexit developments, particularly Boris Johnson's leadership and Brexit negotiations. International terrorism and military operations. British royal family news. Climate change debates and Greta Thunberg's activism. Scottish and Irish independence issues. Conspiracy theories, showing skepticism toward official narratives. International news events including natural disasters.<br><br>
+                                    <strong>Values:</strong> Strong pro-Brexit stance, demanding immediate EU exit ('31 OCTOBER WE'RE LEAVING WITH OR WITHOUT A DEAL'). Anti-establishment sentiment and skepticism toward politicians. Nationalist perspective. Support for Scottish independence. Libertarian attitude toward personal freedom. Appreciation for people 'forging their own path'. Nuanced thinking on complex issues. Pragmatic approach to political problems.<br><br>
+                                    <strong>Communication:</strong> Frequent use of profanity and crude language. British slang and colloquialisms ('my mans', 'sod', 'bollocks'). Emoji usage for emphasis. Capitalization for emphasis. Pop culture references and humor. Casual, conversational tone with informal grammar. Direct, blunt expression of opinions. Sarcastic and sardonic tone when discussing political figures.
+                                </div>
+                            </div>
+                            <button class="expand-btn" onclick="toggleExpand('persona-news-1', this)">
+                                <span>Show more</span>
+                                <span class="arrow">▼</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="ground-truth-box">
+                        <div class="commenter-avatar">UK</div>
+                        <div class="comment-content">
+                            <div class="ground-truth-label">Ground Truth Comment</div>
+                            <div class="comment-text">Meanwhile in Westminster they're all still bickering about whether they should or should not give children in impoverished areas free school meals.</div>
+                            <div class="comment-actions">
+                                <span>👍</span><span>👎</span><span>Reply</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-divider"><span>Example 2</span></div>
+
+                <!-- Example 2 -->
+                <div class="video-player">
+                    <div class="video-player-inner">
+                        <div class="play-button">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <div class="video-title-overlay">Australia fires: US crew dead in firefighting plane crash - BBC News</div>
+                    </div>
+                </div>
+
+                <div class="video-meta">
+                    <div class="channel-avatar">BBC</div>
+                    <div class="video-info">
+                        <h3>Australia fires: US crew dead in firefighting plane crash - BBC News</h3>
+                        <div class="video-stats">
+                            <span>BBC News</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transcript-box">
+                    <div class="transcript-header">📄 Transcript</div>
+                    <div class="transcript-content expandable-content" id="transcript-2">
+                        Three American firefighters have been killed while helping to battle Australia's bushfires authorities say they lost contact with an air tanker in southern New South Wales south of Canberra now those on board they had been helping firefighting efforts by dropping water over a large out-of-control bushfire here's the Commissioner of New South Wales from the Rural Fire Service it is still an active fire ground and and it did take some time with the use of ground crews and a number of aerial surveillance platforms to try and locate the wreckage of the plane an investigation is now underway. Air tankers large air tankers operations have now been suspended as police investigate what happened in the crash and the cause of the crash but yes another reminder of the very difficult conditions that have been happening and also of the fact that these fires are still blazing some of them out of control as we speak 70 fires burning in New South Wales 44 of those are not contained at the moment so even though there was a lull in the weather in the past few days the danger is yet not over in this bushfire season. The prime minister Scott Morrison has been treating he says my deepest condolences to the loved ones friends and colleagues of those who have lost their lives such a terrible tragedy. Captain Ian McBeth, 45, first officer Paul Clyde Hudson, 43, and flight engineer Rick A DeMorgan Jr, 44, were killed. The cause of the C-130 Hercules crash is not yet known. New South Wales Premier Gladys Berejiklian called it an "unbelievable loss" and offered a state memorial.
+                    </div>
+                    <button class="expand-btn" onclick="toggleExpand('transcript-2', this)">
+                        <span>Show more</span>
+                        <span class="arrow">▼</span>
+                    </button>
+                </div>
+
+                <div class="comments-section">
+                    <div class="comments-header">💬 Comments</div>
+                    
+                    <div class="comment-input-area">
+                        <div class="commenter-avatar" style="background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);">CA</div>
+                        <div class="comment-input-wrapper">
+                            <div class="persona-tag">
+                                <strong>👤 User Persona:</strong>
+                                <div class="expandable-content" id="persona-news-2">
+                                    <strong>Demographics:</strong> California, USA. American nationality.<br><br>
+                                    <strong>Interests:</strong> US politics and Trump administration activities, frequently commenting on presidential actions and policies. International politics, particularly Brexit developments. Aviation safety and firefighting equipment, demonstrating technical knowledge ('C-130 tankers aren't not safe. US Forestry Service used to use them until there were too many crashes'). Coronavirus pandemic response and public health policy. Economic issues and wealth inequality. Government accountability and transparency. Workers' rights and corporate responsibility.<br><br>
+                                    <strong>Values:</strong> Strong opposition to nepotism and unqualified appointments. Belief in government accountability. Support for workers' rights and fair corporate taxation. Advocacy for public health measures. Concern for worker safety, praising firefighters as 'True heroes doing the best they could with horrible equipment'. Preference for evidence-based policy and competent crisis management.<br><br>
+                                    <strong>Communication:</strong> Frequent use of derogatory nicknames for political figures ('orange dump,' 'Spanky,' 'Dipshiiit Donnie'). Heavy use of 'LOL' to express mockery. Intentional misspelling of profanity to avoid filters. Short, punchy sentences with strong emotional content. Extensive use of sarcasm and mock quotations. Occasional longer, more detailed responses when discussing technical topics like aviation safety.
+                                </div>
+                            </div>
+                            <button class="expand-btn" onclick="toggleExpand('persona-news-2', this)">
+                                <span>Show more</span>
+                                <span class="arrow">▼</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="ground-truth-box" style="background: #EFF6FF; border-color: #BFDBFE; border-left-color: #3B82F6;">
+                        <div class="commenter-avatar" style="background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);">CA</div>
+                        <div class="comment-content">
+                            <div class="ground-truth-label" style="color: #1D4ED8;">Ground Truth Comment</div>
+                            <div class="comment-text">Before the US Forestry Service stopped using them due to the same reasons, the pilots were well aware of the dangers. They called them flying death traps. Unfortunately the "can-do" willingness of the firefighters and pilots made it so they risked their lives more than they should've. Also they knew of stress fractures in the planes structures AND STILL FLEW THEM! True heroes doing the best they could with horrible equipment.</div>
+                            <div class="comment-actions">
+                                <span>👍</span><span>👎</span><span>Reply</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== BOOK DATASET ==================== -->
+        <section class="dataset-section" data-dataset="book">
+            <div class="book-container">
+                <!-- Example 1 -->
+                <div class="amazon-header">
+                    <div class="amazon-logo">amazon<span>.com</span></div>
+                    <div class="amazon-search">
+                        <input type="text" value="Bob Books Set 1" disabled>
+                        <button>🔍</button>
+                    </div>
+                </div>
+                <div class="book-product-card">
+                    <div class="book-layout">
+                        <div class="book-cover" style="background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);">
+                            <div class="book-cover-title">BOB BOOKS</div>
+                            <div class="book-cover-author">Set 1: Beginning Readers</div>
+                        </div>
+                        <div class="book-details">
+                            <h3>Bob Books - Set 1: Beginning Readers Box Set | Phonics, Ages 4 and up, Kindergarten</h3>
+                            <a href="#" class="book-author-link">by Bobby Lynn Maslen (Author), John R. Maslen (Illustrator)</a>
+                            <div class="book-description">
+                                <div class="expandable-content" id="book-desc-1">
+                                    <strong>From the Author:</strong> You've prepared your child for reading - refrigerator magnets down low and easy to reach; letter sounds taught. Your child can proudly spell his or her name. Perhaps he can identify the "stop" and "open" signs as you drive in your car. He or she is ready for the next step into reading. Inside the colorful box, the bright red cover beckons. On the first page, the letters: M - a - t. Your child says the sounds: mmmmm, aaa, ttt. Then, faster: "Mat." Your youngster has read his first word! "Sam", "sat" and "on" complete the vocabulary, and suddenly your child can say, "I read the whole book!" That is the magic of Bob Books. After 13 years of teaching 3, 4 and 5-year-olds, watching a child make that giant first step into reading still thrills me.<br><br>
+                                    <strong>Features:</strong> The Bob Books boxed set that started it all! This iconic phonics-based learn-to-read set has sold millions of copies, allowing children around the world to say with pride, "I read the whole book!" With only four letter sounds in the first story (M, A, T, and S), children can read a whole book and their confidence grows. Inside the box you'll find: 12 easy-to-read, hilarious small books; 12 pages each; 7-20 unique words per book. Two- and three-letter words with short vowels that can be decoded or "sounded out" (on, sat, can, ran). Very simple sentences (Sam sat.). New letter sounds added gradually across the books, until young readers have read books with all letters of the alphabet (except Q). Friendly, two-color illustrations that add fun and do not distract from the words. A parent card with tips for helping your child learn to read.
+                                </div>
+                                <button class="expand-btn" onclick="toggleExpand('book-desc-1', this)">
+                                    <span>Show more</span>
+                                    <span class="arrow">▼</span>
+                                </button>
+                            </div>
+
+                            <div class="review-section">
+                                <h4>Customer Reviews</h4>
+                                <div class="reviewer-persona">
+                                    <div class="reviewer-avatar">TC</div>
+                                    <div class="reviewer-info">
+                                        <strong>👤 Reviewer Persona</strong>
+                                        <div class="expandable-content" id="persona-book-1">
+                                            <strong>Demographics:</strong> Male, mid-40s (born around 1960-1962), lives in a city with a large liberal population. Technical/professional field, likely software development or IT (attended WebSphere training). American. Married with young children (two-year-old, three-year-old, and five-year-old son). Self-identifies as conservative but intellectually independent.<br><br>
+                                            <strong>Interests:</strong> Political philosophy and conservative thought. Technology and software development, specifically enterprise systems like IBM WebSphere. Children's literature and educational materials. Vintage collectibles, particularly Johnny Lightning toy cars. Metaphysics and theology. Science fiction literature. Media criticism and analysis of bias. Race relations and civil rights history.<br><br>
+                                            <strong>Values:</strong> Intellectual honesty and fact-checking above partisan loyalty, citing Reagan's 'Trust, but verify'. Personal responsibility and self-reliance. Traditional family values discovered through experience. Critical thinking over blind acceptance, willing to give low ratings to books when they disappoint. Practical application of knowledge. Skepticism toward both political extremes.<br><br>
+                                            <strong>Communication:</strong> Conversational and accessible writing style, often beginning with phrases like 'Well,' 'So,' and 'That said'. Extensive use of personal anecdotes. Self-deprecating humor. Balanced critique approach. Frequent use of parenthetical asides. Direct address to potential readers. Clear structural organization with numbered points or explicit transitions.
+                                        </div>
+                                        <button class="expand-btn" onclick="toggleExpand('persona-book-1', this)" style="margin-top: 6px;">
+                                            <span>Show more</span>
+                                            <span class="arrow">▼</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="ground-truth-review">
+                                    <div class="ground-truth-label">Ground Truth Review</div>
+                                    <div class="review-header">
+                                        <span class="review-title">Not impressed.</span>
+                                        <span class="verified-badge">Verified Purchase</span>
+                                    </div>
+                                    <div class="review-text">
+                                        I'm currently working through these books with my children, one of whom is in Kindergarten. They made me long for the days of the "Tip and Mitten" and "Dick and Jane" readers.<br><br>The drawings are of poor quality. I could draw better myself. And, more frustrating to me, there is no attempt at any kind of story. What there is consists of random sentence fragments concentrated around certain phonetics.<br><br>What does work in these books is the progression of usage of words from very simple to slightly more complex by the end of the book, and the series concept allows the child to slowly build competence in reading.<br><br>So, they're not all bad and I am working with them, but do yourself a favor and unless your local school system has you roped into using them at home, look around and see what your other options are.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-divider"><span>Example 2</span></div>
+
+                <!-- Example 2 -->
+                <div class="amazon-header">
+                    <div class="amazon-logo">amazon<span>.com</span></div>
+                    <div class="amazon-search">
+                        <input type="text" value="Ultimate Biography of Earth" disabled>
+                        <button>🔍</button>
+                    </div>
+                </div>
+                <div class="book-product-card">
+                    <div class="book-layout">
+                        <div class="book-cover" style="background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);">
+                            <div class="book-cover-title">THE ULTIMATE BIOGRAPHY OF EARTH</div>
+                            <div class="book-cover-author">Nick Lund</div>
+                        </div>
+                        <div class="book-details">
+                            <h3>The Ultimate Biography of Earth: From the Big Bang to Today!</h3>
+                            <a href="#" class="book-author-link">by Nick Lund (Author), Jason Ford (Illustrator)</a>
+                            <div class="book-description">
+                                <div class="expandable-content" id="book-desc-2">
+                                    <strong>Description:</strong> The natural history of Earth, told in biography form. Told in a lively, illustrated biography form to deliver its cutting-edge science in the most compelling way, here is the story of Earth, from the chaotic Hadean eon with its huge oceans of molten rock to today's Cenozoic era, aka the Age of Mammals (and that includes us humans). Learn about the Great Oxygenation Event. Meet some of the planet's wildest life-forms, like Megatherium—a sloth as big as an elephant. Watch the continents separate, crash together, and reform. Get an eyewitness view of Earth's major mass extinction events, including the asteroid strike that doomed the dinosaurs. And catch up on the basics, like why the sky is blue and how glaciers shape the land. It's the ultimate biography of the best home in the galaxy. Fully illustrated and packed with facts!<br><br>
+                                    <strong>Reviews:</strong> "An entertaining and educational read, The Ultimate Biography of Earth is a delightful journey through the history of the universe with a focus on Earth and life. Highly recommend for curious children who are elementary and middle school aged." — YABC<br><br>
+                                    <strong>About the Author:</strong> Nick Lund is a nature writer who mostly writes silly things about birds on Twitter when he should be working. His writing on birds and nature has appeared in Audubon magazine, National Parks magazine, Slate.com, the Washington Post, the Maine Sportsman, and others. He is a graduate of the University of Maine School of Law and has worked in federal energy policy in Washington, DC, before returning to Maine with his wife and son to work for Maine Audubon.
+                                </div>
+                                <button class="expand-btn" onclick="toggleExpand('book-desc-2', this)">
+                                    <span>Show more</span>
+                                    <span class="arrow">▼</span>
+                                </button>
+                            </div>
+
+                            <div class="review-section">
+                                <h4>Customer Reviews</h4>
+                                <div class="reviewer-persona">
+                                    <div class="reviewer-avatar">YI</div>
+                                    <div class="reviewer-info">
+                                        <strong>👤 Reviewer Persona</strong>
+                                        <div class="expandable-content" id="persona-book-2">
+                                            <strong>Demographics:</strong> Yoga instructor (teaches adult and child yoga for nearly a decade). Parent of multiple children including a 9-year-old, 4-year-old son, and tween daughter. Attended college where they took 'Intro to Art History class'. Identifies as 'a long-time knitter'.<br><br>
+                                            <strong>Interests:</strong> Children's literature and educational books, particularly DK series publications. Wellness and self-care books, especially those addressing work-life balance for mothers. Feminist literature and women's history, noting appreciation for 'books that feature women of color'. Art history and Renaissance artists. Knitting and craft books. Nostalgia-driven content aimed at '90s kids' and millennials. Children's mindfulness and yoga activities. Picture books with strong illustrations. Music history, particularly 1980s alternative music like Morrissey and The Smiths. Cookbooks with plant-based and wellness-focused recipes. Environmental and social justice themes in children's books.<br><br>
+                                            <strong>Values:</strong> Diversity and representation. Authenticity over preachiness. Practical, accessible advice over rigid rules. Quality children's education through engaging, well-presented materials. Self-care and wellness balanced with realistic expectations for busy parents. Feminist principles that are 'not one-size-fits-all.' Environmental awareness and conservation. Age-appropriate content that can engage both children and adults. Artistic merit and beautiful presentation in books. Gift-giving culture, consistently evaluating books as potential 'great gift' options.<br><br>
+                                            <strong>Communication:</strong> Structured reviews with clear, descriptive titles followed by detailed explanations. Frequent use of first-person perspective combined with family reactions: 'My 9 year old loves it, and I like it, too'. Conversational yet informative tone. Consistent pattern of ending reviews with gift recommendations: 'would make a great gift'. Balanced criticism. Professional credibility statements when relevant: 'As a yoga teacher, I approve'. Emphasis on visual quality: 'beautifully illustrated'.
+                                        </div>
+                                        <button class="expand-btn" onclick="toggleExpand('persona-book-2', this)" style="margin-top: 6px;">
+                                            <span>Show more</span>
+                                            <span class="arrow">▼</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="ground-truth-review">
+                                    <div class="ground-truth-label">Ground Truth Review</div>
+                                    <div class="review-header">
+                                        <span class="review-title">Great Book!</span>
+                                        <span class="verified-badge">Verified Purchase</span>
+                                    </div>
+                                    <div class="review-text">
+                                        I got this for my science-obsessed 7 year old, and I learned a few things along the way. This is a great book about the history and possible future of the earth. It's really well-written. (I wasn't expecting the former.) The illustrations are nice and the language is kid-friendly and explains complex things very simply. I am very pleased with this. Would make a great gift.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ==================== OPINION DATASET ==================== -->
+        <section class="dataset-section" data-dataset="opinion">
+            <div class="reddit-container">
+                <!-- Example 1 -->
+                <div class="reddit-post-card">
+                    <div class="reddit-header-bar">
+                        <div class="reddit-logo">
+                            <div class="reddit-icon">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FF4500"/><circle cx="8.5" cy="10" r="1.5" fill="white"/><circle cx="15.5" cy="10" r="1.5" fill="white"/><path d="M7.5 14.5c0 0 2 2 4.5 2s4.5-2 4.5-2" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+                            </div>
+                            <span class="reddit-wordmark">reddit</span>
+                        </div>
+                        <span class="subreddit-name">r/AmItheAsshole</span>
+                    </div>
+
+                    <div class="reddit-post">
+                        <div class="vote-column">
+                            <div class="vote-btn">▲</div>
+                            <div class="vote-count">•</div>
+                            <div class="vote-btn">▼</div>
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta">Posted by <a href="#">u/ThrowRAhalloweendred</a> • 6 hours ago</div>
+                            <div class="post-title-reddit">AITA for telling my mom it wasn't cute or funny to dress me as a hot dog instead of a princess?</div>
+                            <div class="post-body expandable-content" id="reddit-post-1">
+                                So there's this new Target commercial going around where a little girl dresses as a hot dog, and it came on while my family was watching a scary movie. I (20F) am home from college for the weekend and brought my boyfriend, and my mother (57F) decided it would be hilarious to mention that she'd made me a hot dog costume as a kid, except the way she told the story, it was my request. She said that all the girls wanted to be Disney princesses, but I had asked to be a hot dog, and so she'd gone out of her way to make me that costume.<br><br>
+                                This is not what happened, and I said as much. What actually happened is that I wanted to be Snow White, and had told everyone, including the teachers, that I was going to be Snow White. I was obsessed with that movie as a kid, to the point where I would actually get invested in doing chores because I was cleaning up just like Snow White. My dad and I would watch that movie all the time, and I was very excited to be Snow White for Halloween.<br><br>
+                                My mother decided that she wanted to be quirky and that Snow White was a bad role model after I got in trouble for trying to cook dinner for my family. I was about eight, and I tried to make hot dogs, like how she made food for the dwarves in the movie, and I made a mess. My mom "surprised" me on the day of with this crappy hot dog suit, and told me if I didn't wear it she'd never let me watch Snow White again. She took a million pictures, the other girls teased me for months, and it was one of the most humiliating moments of my childhood.<br><br>
+                                I told the real story, and mentioned that I got through the day by pretending that she was the evil queen making me dress in rags, but the rags happened to be a garbage meat costume. She got really quiet after that, and after we left, my brother says she was crying and looking at the pictures from that Halloween.
+                            </div>
+                            <button class="expand-btn" onclick="toggleExpand('reddit-post-1', this)" style="margin-top: 8px;">
+                                <span>Show more</span>
+                                <span class="arrow">▼</span>
+                            </button>
+                            <div class="post-actions">
+                                <span class="post-action">💬 Comments</span>
+                                <span class="post-action">🔗 Share</span>
+                                <span class="post-action">⭐ Save</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reddit-comments">
+                        <div class="reddit-comment">
+                            <div class="comment-thread-line"><div class="thread-line"></div></div>
+                            <div class="reddit-comment-content">
+                                <div class="reddit-comment-meta"><span class="author">LowBalance4404</span> • 5h</div>
+                                <div class="reddit-comment-text">I'd say let it go, but that would be so hypocritical of me. My mom has a version of my childhood that did not happen. AT all. In my mom's version, it was all snowflakes, hugs, puppies, and unicorns and that is not the reality I lived.</div>
+                            </div>
+                        </div>
+                        <div class="reddit-comment" style="padding-left: 28px;">
+                            <div class="comment-thread-line"><div class="thread-line"></div></div>
+                            <div class="reddit-comment-content">
+                                <div class="reddit-comment-meta"><span class="author">ThrowRAhalloweendred</span> • 4h</div>
+                                <div class="reddit-comment-text">In my mom's version, I hated the other girls in town as much as she hated the other women and *wanted* to be a weird kid because she wanted to be a weird mom who doesn't like housework or makeup or dresses.</div>
+                            </div>
+                        </div>
+                        <div class="reddit-comment" style="padding-left: 28px;">
+                            <div class="comment-thread-line"><div class="thread-line"></div></div>
+                            <div class="reddit-comment-content">
+                                <div class="reddit-comment-meta"><span class="author">ThrowRAhalloweendred</span> • 3h</div>
+                                <div class="reddit-comment-text">Ugh. Felt. My mom always insists I was a tomboy and that "tiktok ruined her," but seems to forget that all the evidence of me ever being like that was stuff she forced me to do despite often very loud protests.</div>
+                            </div>
+                        </div>
+
+                        <div class="reddit-user-comment">
+                            <div class="reddit-persona-tag">
+                                <strong>👤 User Persona:</strong>
+                                <div class="expandable-content" id="persona-reddit-1">
+                                    <strong>Demographics:</strong> Works in family business related to gravestone/monument sales. Has personal experience with body image issues.<br><br>
+                                    <strong>Interests:</strong> Relationship conflicts and interpersonal dynamics. Wedding-related drama and family conflicts. Financial exploitation and manipulation in relationships. Boundary violations and consent issues. Family dynamics involving toxic or manipulative behavior. Body image issues and eating disorders.<br><br>
+                                    <strong>Values:</strong> Strong belief in personal boundaries and the right to enforce them. Zero tolerance for manipulation and exploitation. Advocates for cutting off toxic family members. Believes actions have consequences. Values honesty and transparency. Prioritizes self-protection over maintaining dysfunctional relationships.<br><br>
+                                    <strong>Communication:</strong> Uses short, direct, declarative sentences with clear moral judgments. Employs emphatic repetition for emphasis ('Oh honey no. No. No. No.'). Frequently validates others' decisions. Uses conversational, informal language. Often begins responses with strong reactions. Demonstrates empathy through personal connection ('I can relate to this'). Maintains a protective, almost parental tone.
+                                </div>
+                            </div>
+                            <button class="expand-btn" onclick="toggleExpand('persona-reddit-1', this)">
+                                <span>Show more</span>
+                                <span class="arrow">▼</span>
+                            </button>
+                            <div class="ground-truth-reddit">
+                                <div class="ground-truth-label">Ground Truth Comment</div>
+                                <div class="reddit-comment-text" style="color: #D7DADC;">
+                                    Your Mom has major issues. I'm speaking as a Mom of grown kids (who are all amazing in their own way), who was also shamed by my own Mom. I was just not what she wanted. I'm still not, but Im finally starting to live life on my own terms.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-divider"><span>Example 2</span></div>
+
+                <!-- Example 2 -->
+                <div class="reddit-post-card">
+                    <div class="reddit-header-bar">
+                        <div class="reddit-logo">
+                            <div class="reddit-icon">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FF4500"/><circle cx="8.5" cy="10" r="1.5" fill="white"/><circle cx="15.5" cy="10" r="1.5" fill="white"/><path d="M7.5 14.5c0 0 2 2 4.5 2s4.5-2 4.5-2" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+                            </div>
+                            <span class="reddit-wordmark">reddit</span>
+                        </div>
+                        <span class="subreddit-name">r/AmItheAsshole</span>
+                    </div>
+
+                    <div class="reddit-post">
+                        <div class="vote-column">
+                            <div class="vote-btn">▲</div>
+                            <div class="vote-count">•</div>
+                            <div class="vote-btn">▼</div>
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta">Posted by <a href="#">u/No_Writing9686</a> • 10 hours ago</div>
+                            <div class="post-title-reddit">AITA for "losing" my passport to avoid babysitting on my vacation?</div>
+                            <div class="post-body expandable-content" id="reddit-post-2">
+                                I (F17) still live at home. My sister (28) is married and has two kids (5/3). Whenever she comes over to visit my parents and her stick me with the kids. This wouldn't be a problem except she doesn't visit for an evening. She will come for a week. And for that week I'm an unpaid nanny.<br><br>
+                                My parents decided that since this was my last summer before I became an adult we would be going to Disneyland to celebrate my graduation. I asked who was going and they said it was just the three of us.<br><br>
+                                But when we got to the airport my sister and her family were there. Strangely enough they were also going to Disneyland. I went into my backpack and grabbed my passport. I put it in my sock.<br><br>
+                                When we got to the international security I couldn't find it. We looked everywhere. I had to Uber home and I missed my flight. Oh well. I get to stay home by myself for a week of peace and quiet.<br><br>
+                                My mom and sister have both been posting about how hard it is to be at Disneyland with two little ones. They both posted that I ruined the vacation by being so thoughtless.
+                            </div>
+                            <button class="expand-btn" onclick="toggleExpand('reddit-post-2', this)" style="margin-top: 8px;">
+                                <span>Show more</span>
+                                <span class="arrow">▼</span>
+                            </button>
+                            <div class="post-actions">
+                                <span class="post-action">💬 Comments</span>
+                                <span class="post-action">🔗 Share</span>
+                                <span class="post-action">⭐ Save</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reddit-comments">
+                        <div class="reddit-comment">
+                            <div class="comment-thread-line"><div class="thread-line"></div></div>
+                            <div class="reddit-comment-content">
+                                <div class="reddit-comment-meta"><span class="author">poorladlemonadestand</span> • 8h</div>
+                                <div class="reddit-comment-text">NTA. But if they posted on social media say "wait. I ruined the vacation because I was supposed to help with the kids or take care of them myself? So this wasn't about me?"</div>
+                            </div>
+                        </div>
+                        <div class="reddit-comment" style="padding-left: 28px;">
+                            <div class="comment-thread-line"><div class="thread-line"></div></div>
+                            <div class="reddit-comment-content">
+                                <div class="reddit-comment-meta"><span class="author">No_Writing9686</span> • 7h</div>
+                                <div class="reddit-comment-text">Boy did your idea light off the fireworks. They both are getting lit into by everyone. I guess my mom promised my dad she wasn't going to invite my sister because this was supposed to be for me. She went behind his back. The whole trip has turned into a shit show.</div>
+                            </div>
+                        </div>
+
+                        <div class="reddit-user-comment">
+                            <div class="reddit-persona-tag">
+                                <strong>👤 User Persona:</strong>
+                                <div class="expandable-content" id="persona-reddit-2">
+                                    <strong>Interests:</strong> Family conflict resolution and interpersonal disputes. Stepfamily dynamics and blended family issues. Parental rights and child protection. Boundary violations and privacy issues. Teacher misconduct and educational system accountability. Documentation and evidence gathering for disputes. Mother-in-law and extended family boundary issues.<br><br>
+                                    <strong>Values:</strong> Strong protection of children's interests. Belief in documenting wrongdoing through evidence ('record video'). Advocacy for escalation to authorities when necessary. Zero tolerance for manipulation and boundary violations. Support for holding people accountable. Belief in taking decisive action. Support for individuals standing up against family pressure.<br><br>
+                                    <strong>Communication:</strong> Casual, direct writing style with frequent spelling irregularities ('diffrent', 'halirious'). Inconsistent capitalization, often using lowercase 'i'. Uses Reddit-specific abbreviations like 'Nta' and 'AH'. Brief, action-oriented responses. Employs imperative sentence structures. Tends to lead with strongest recommendation, then provides supporting rationale. Uses 'ps' for additional thoughts.
+                                </div>
+                            </div>
+                            <button class="expand-btn" onclick="toggleExpand('persona-reddit-2', this)">
+                                <span>Show more</span>
+                                <span class="arrow">▼</span>
+                            </button>
+                            <div class="ground-truth-reddit">
+                                <div class="ground-truth-label">Ground Truth Comment</div>
+                                <div class="reddit-comment-text" style="color: #D7DADC;">
+                                    Good 👏👏👏👏 now your dad needs to put both your mom and your sister in their places so this never happens again. Also find urgent appointments/study at the library every time your sister comes to the house with the kids and you weren't asked in advance and agreed to babysit 😉 ( since they didn't let you know in advance you have made plans oopsie - be vague if your mother asks in advance about your plans always) NTA and epic reaction. Again applause for it Kudos for standing up for yourself and stop enabling them.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== POLITICS DATASET ==================== -->
+        <section class="dataset-section" data-dataset="politics">
+            <div class="medium-container">
+                <!-- Example 1 -->
+                <div class="medium-header">
+                    <div class="medium-logo">Medium</div>
+                    <div class="medium-nav">
+                        <span>Our story</span>
+                        <span>Membership</span>
+                        <span>Write</span>
+                    </div>
+                </div>
+
+                <article class="medium-article">
+                    <div class="medium-article-header">
+                        <h2 class="medium-article-title">Possible Democratic Presidential Candidates are Grabbing the Headlines</h2>
+                        <p class="medium-article-subtitle">Look for these familiar faces on the campaign trail</p>
+                        <div class="medium-author-row">
+                            <div class="medium-author-avatar">CB</div>
+                            <div class="medium-author-info">
+                                <div class="medium-author-name">Caren Black</div>
+                                <div class="medium-article-meta">Published in Political Thought · 12 min read · Feb 2025</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="medium-article-body expandable-content" id="medium-post-1">
+                        <p>The Democratic presidential hopefuls are starting their campaigns already. It may be too little too late if Trump cancels elections, including the 2028 presidential election. But let's pretend for a moment that these are normal times and the Democrats have lost a big election.</p>
+                        <p>The first was California governor Gavin Newsom (D). God, it feels like he has been running for president forever, doesn't it? He's shaking things up, interviewing guests from across the political spectrum including Charlie Kirk and Steve Bannon. This started a firestorm among Democrats, but I think it was a smart move.</p>
+                        <p>Rep. Alexandria Ocasio-Cortez (D-N.Y.) has been barnstorming through Arizona, Nevada and Colorado on a "Fighting Oligarchy" tour with Sen. Bernie Sanders (I-VT), drawing huge, dare I say Trump-sized, crowds. I've been a huge fan of AOC and the Squad since she was elected. They remind me so much of us Baby Boomers when we were young and out to change the world.</p>
+                        <p>I was absolutely delighted this morning to read that one of my senators, Cory Booker (D-N.J.) had embarked on a marathon all-night speech on the Senate floor. I have been a fan of Booker since he was the mayor of Newark back in 2006. He famously shoveled neighbors' driveways, saved a woman from a house fire, helped a nervous constituent propose to his girlfriend.</p>
+                        <p>You may have noticed one thing that all three of these politicians have in common: their ages. They are all young. Newsom is 57. Booker is 55. AOC is 35. We are finally getting away from the geriatric candidates. Which one is your favorite?</p>
+                    </div>
+                    <button class="expand-btn" onclick="toggleExpand('medium-post-1', this)">
+                        <span>Show more</span>
+                        <span class="arrow">▼</span>
+                    </button>
+                </article>
+
+                <div class="medium-responses">
+                    <h4>Responses</h4>
+                    <div class="medium-persona-tag">
+                        <div class="medium-persona-avatar">VM</div>
+                        <div class="medium-persona-text">
+                            <strong>👤 User Persona</strong>
+                            <div class="expandable-content" id="persona-politics-1">
+                                <strong>Demographics:</strong> Location: Oregon (Salem, OR mentioned). Occupation: US Marine, no longer on active duty. American. Politically active progressive who physically campaigned for Bernie Sanders in New Hampshire primary 2016.<br><br>
+                                <strong>Interests:</strong> Progressive politics and Bernie Sanders advocacy ('I love Bernie too. In fact instead of vacationing in SoCal in Jan 2016, a couple of friends and I went from Salem, OR to Salem, NH and walked for Bernie'). Trump legal troubles and accountability. Climate change and environmental policy. Abortion rights. Election integrity and voting systems. Gun control. Healthcare policy and Medicare for All.<br><br>
+                                <strong>Values:</strong> Strong progressive ideology with Bernie Sanders as preferred candidate ('I would have rather have had Bernie & Elizabeth' over Biden and Harris). Intense opposition to Trump and MAGA movement. Climate action urgency. Support for reproductive rights. Advocacy for gun control and assault weapons ban. Support for universal healthcare. Anti-war stance based on military experience.<br><br>
+                                <strong>Communication:</strong> Casual, conversational tone with informal language. Frequent use of sarcasm and mockery ('Tex-ass,' 'Orange Idiot'). Brief, punchy responses often under 30 words. Employs rhetorical questions for effect. Uses crude humor and provocative language. Direct, declarative sentences without hedging. Personal anecdotes to establish credibility ('I'm a US Marine').
+                            </div>
+                        </div>
+                    </div>
+                    <button class="expand-btn" onclick="toggleExpand('persona-politics-1', this)">
+                        <span>Show more</span>
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="ground-truth-medium">
+                        <div class="ground-truth-label">Ground Truth Comment</div>
+                        <p class="medium-response-text">
+                            I'm a Bernie Bro and realize he is too old to run for Prez. For me Gavin is too Hollywood and AOC needs more seasoning. Cory would be my choice if these are the only in the running. Michigan Gov Gretchen Whitmer would be my best choice.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="example-divider"><span>Example 2</span></div>
+
+                <!-- Example 2 -->
+                <div class="medium-header">
+                    <div class="medium-logo">Medium</div>
+                    <div class="medium-nav">
+                        <span>Our story</span>
+                        <span>Membership</span>
+                        <span>Write</span>
+                    </div>
+                </div>
+
+                <article class="medium-article">
+                    <div class="medium-article-header">
+                        <h2 class="medium-article-title">How the U.S. Became Fascism's Greatest Success Story</h2>
+                        <p class="medium-article-subtitle">Our 'land of the free' is collapsing into an autocratic nightmare</p>
+                        <div class="medium-author-row">
+                            <div class="medium-author-avatar">RK</div>
+                            <div class="medium-author-info">
+                                <div class="medium-author-name">Robert Krulwich</div>
+                                <div class="medium-article-meta">Published in Political Analysis · 15 min read · Jun 2025</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="medium-article-body expandable-content" id="medium-post-2">
+                        <p>It's 2025, and 'the land of the free' is dead and gone. Kaput. The once-inspiring 'shining city on the hill' has vanished. So has the American dream of a wondrous 'land of opportunity.' These American attributes or ideals were never fully realized, sadly, but at least the promise was still there - until recently.</p>
+                        <p>The reason the far-right takeover of the U.S. is fascism's greatest 'success story' is simple: the U.S. is both the world's foremost (former) bastion of democracy and by far the largest nation (population: 347,000,000) to ever succumb to autocratic fascism.</p>
+                        <p>What made the U.S. a prime target for a fascist takeover? In my opinion, our super-individualism and its alter-ego, late-stage capitalism, paved the way and made U.S. fascism almost inevitable. Both systems are based on selfishness, greed, and endless competition.</p>
+                        <p>DJT now controls or blatantly ignores the Congress, the courts, the press, and our immigration and deportation processes. He is in a position now to do whatever he wants, whenever he wants, to whomever he wants - with much support from our Supreme Court and GOP-led Congress.</p>
+                        <p>I'm sorry to say it, but this nasty pattern is the very definition of autocratic fascism. As of today, the U.S. is already 90% 'there' - and its current ruling party, the GOP, seems firmly committed to enabling outright autocracy and fascism. Most U.S. citizens seem too dumbed-down to fully grasp what's going on or what we are quickly losing.</p>
+                    </div>
+                    <button class="expand-btn" onclick="toggleExpand('medium-post-2', this)">
+                        <span>Show more</span>
+                        <span class="arrow">▼</span>
+                    </button>
+                </article>
+
+                <div class="medium-responses">
+                    <h4>Responses</h4>
+                    <div class="medium-persona-tag">
+                        <div class="medium-persona-avatar">TA</div>
+                        <div class="medium-persona-text">
+                            <strong>👤 User Persona</strong>
+                            <div class="expandable-content" id="persona-politics-2">
+                                <strong>Interests:</strong> Trump administration policies and actions, repeatedly commenting on Trump's relationship with Putin and Russia. Russia-Ukraine conflict and military developments. NATO and international alliances, expressing concern about 'what Trump has done to alienate our allies'. Geopolitical strategy and foreign policy. U.S. education system and critical thinking. Election integrity and democratic processes. Project 2025 and Republican policy agenda.<br><br>
+                                <strong>Values:</strong> Strong anti-Trump stance, calling him 'dumb as a rock'. Belief Trump is a Russian asset. Deep criticism of Republican Party, agreeing 'The Republican Party is essentially a criminal syndicate'. No sympathy for Trump voters, stating 'I hope those "useful idiots" suffer the most'. Patriotic concern for America's direction, expressing 'I love my country but, I hate what it is becoming'. Support for Ukraine. Value of education and critical thinking.<br><br>
+                                <strong>Communication:</strong> Direct and harsh language with strong emotional content, using terms like 'useful idiots,' 'dumb as rocks'. Frequent use of rhetorical questions for emphasis. Sarcastic and dismissive tone toward opposing views. Mix of brief agreements and longer analytical responses. Liberal use of exclamation points. Employs metaphors and colloquialisms. References to popular culture and quotes. Expresses gratitude for informative content.
+                            </div>
+                        </div>
+                    </div>
+                    <button class="expand-btn" onclick="toggleExpand('persona-politics-2', this)">
+                        <span>Show more</span>
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="ground-truth-medium">
+                        <div class="ground-truth-label">Ground Truth Comment</div>
+                        <p class="medium-response-text">
+                            The Supreme Court justice's are intelligent people so why is it that they seem to be completely blind to what is happening in the U.S.? Surely they can't believe that DT and the MAGAT's are the answers to our many real world problems. I have a degree in tax accounting and I also have an MBA and I have always thought that the U.S. brand of capitalism went too far. I have always felt that the "invisible hand of capitalism" was used to justify too many actions and decisions that were morally bankrupt. I believe we have our first through twelfth grade education system to blame for the fact that "most U.S. citizens seem too dumbed-down to fully grasp what's going on". So, if we ever have another Department of Education it is good that it will have to be re-built from the ground up. Let's just hope they don't make the same mistakes again.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ==================== CHAT DATASET ==================== -->
+        <section class="dataset-section" data-dataset="chat">
+            <div class="chat-container">
+                <!-- Example 1 -->
+                <div class="chat-window">
+                    <div class="chat-header-bar">
+                        <h3>AI Assistant</h3>
+                        <span>WildChat</span>
+                    </div>
+                    <div class="chat-messages">
+                        <div class="chat-no-persona">ℹ️ No persona information available for this dataset</div>
+                        
+                        <div class="chat-timestamp">Hong Kong</div>
+                        
+                        <div class="chat-message user">
+                            <div class="chat-bubble">how to use xcopy to update a folder files and remove the deleted files?</div>
+                        </div>
+                        <div class="chat-message assistant">
+                            <div class="chat-bubble expandable-content" id="chat-response-1">
+                                To use xcopy to update a folder's files and remove the deleted files, follow these steps:<br><br>
+                                1. Open the Command Prompt by searching for "cmd" in the Start menu.<br>
+                                2. Navigate to the destination folder where you want to update the files. You can use the "cd" command to move to the desired directory.<br>
+                                3. Once you're in the correct folder, use the xcopy command with the appropriate options. The basic syntax is:<br><br>
+                                <code>xcopy &lt;source&gt; &lt;destination&gt; /D /E /H /Y</code><br><br>
+                                The options used here are:<br>
+                                • /D copies only files that are newer in the source folder.<br>
+                                • /E includes all subdirectories, including empty ones.<br>
+                                • /H copies hidden and system files.<br>
+                                • /Y suppresses the confirmation prompt.<br><br>
+                                4. Press Enter to execute the command, and xcopy will update the destination folder with the latest files from the source folder. Any deleted files will be removed from the destination folder.<br><br>
+                                Note: Make sure to double-check the source and destination paths before executing the command to avoid accidental data loss.
+                            </div>
+                        </div>
+                        <button class="expand-btn" onclick="toggleExpand('chat-response-1', this)" style="margin-left: 0; margin-bottom: 12px;">
+                            <span>Show more</span>
+                            <span class="arrow">▼</span>
+                        </button>
+
+                        <div class="chat-ground-truth">
+                            <div class="chat-ground-truth-label">
+                                <span>⬇️ Ground Truth: Next User Turn</span>
+                            </div>
+                            <div class="chat-message user">
+                                <div class="chat-bubble">I want to remove the deleted files too</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-divider"><span>Example 2</span></div>
+
+                <!-- Example 2 -->
+                <div class="chat-window">
+                    <div class="chat-header-bar">
+                        <h3>AI Assistant</h3>
+                        <span>WildChat</span>
+                    </div>
+                    <div class="chat-messages">
+                        <div class="chat-no-persona">ℹ️ No persona information available for this dataset</div>
+
+                        <div class="chat-timestamp">Erbil, Iraq</div>
+
+                        <div class="chat-message user">
+                            <div class="chat-bubble">Hi there, I need your help to think about a project that is very unique and one of a kind! something that no one else has done before! something like the blockchain when it started! do you have any ideas?</div>
+                        </div>
+                        <div class="chat-message assistant">
+                            <div class="chat-bubble expandable-content" id="chat-response-2a">
+                                Creating something wholly unique and groundbreaking like blockchain technology is a high aspiration. Here are a few areas and project ideas that could be as transformative:<br><br>
+                                1. <strong>Decentralized Internet</strong>: A project that ensures absolute data privacy, where users truly own their data and identity.<br><br>
+                                2. <strong>Quantum Cryptography for Mass Market</strong>: Developing quantum-secure communication tools that are as easy to use as WhatsApp or Signal.<br><br>
+                                3. <strong>AI Integrated with Human Brain</strong>: Creating an AI-driven neural interface that enhances cognitive functions in real-time.<br><br>
+                                4. <strong>Autonomous Ecosystem Restoration</strong>: Autonomous machines working tirelessly to restore ecosystems - planting trees, removing invasive species, cleaning polluted waters.<br><br>
+                                5. <strong>Holodeck-Like Virtual Reality</strong>: A VR environment engaging all senses realistically - smell, touch, and taste.
+                            </div>
+                        </div>
+                        <button class="expand-btn" onclick="toggleExpand('chat-response-2a', this)" style="margin-left: 0; margin-bottom: 12px;">
+                            <span>Show more</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="chat-message user">
+                            <div class="chat-bubble">is there anything more like NFTs or cryptos that I can think of?</div>
+                        </div>
+                        <div class="chat-message assistant">
+                            <div class="chat-bubble expandable-content" id="chat-response-2b">
+                                If you're specifically interested in digital assets similar to NFTs and cryptocurrencies, here are innovative ideas:<br><br>
+                                1. <strong>Self-Sovereign Identity Tokens</strong>: Digital identity that individuals control themselves, using blockchain for security.<br><br>
+                                2. <strong>DAOs for Physical Assets</strong>: Collectively owned real estate or renewable energy grids with decisions made via smart contracts.<br><br>
+                                3. <strong>Tokenized Ecosystem Services</strong>: A marketplace for carbon sequestration, water purification, and biodiversity by tokenizing them.<br><br>
+                                4. <strong>Digital Collectibles with Physical Experiences</strong>: NFTs tied to exclusive access to events or one-on-one meetings with celebrities.<br><br>
+                                5. <strong>Interactive and Evolving NFTs</strong>: NFTs that evolve over time based on triggers or actions.<br><br>
+                                6. <strong>Personal Data Marketplaces</strong>: Individuals tokenize their personal data and sell it through a secure marketplace.
+                            </div>
+                        </div>
+                        <button class="expand-btn" onclick="toggleExpand('chat-response-2b', this)" style="margin-left: 0; margin-bottom: 12px;">
+                            <span>Show more</span>
+                            <span class="arrow">▼</span>
+                        </button>
+
+                        <div class="chat-ground-truth">
+                            <div class="chat-ground-truth-label">
+                                <span>⬇️ Ground Truth: Next User Turn</span>
+                            </div>
+                            <div class="chat-message user">
+                                <div class="chat-bubble">I like these ideas actually! but can you give me some more?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== EMAIL DATASET ==================== -->
+        <section class="dataset-section" data-dataset="email">
+            <div class="email-container">
+                <!-- Example 1 (was Example 2 - Ski Trip) -->
+                <div class="outlook-window">
+                    <div class="outlook-toolbar">
+                        <div class="outlook-logo">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.27 5.1 7.63 12 4.18zM4 16.54V9.09l7 3.5v7.45l-7-3.5zm9 3.5v-7.45l7-3.5v7.45l-7 3.5z"/></svg>
+                            Outlook
+                        </div>
+                        <div class="outlook-tabs">
+                            <span class="outlook-tab active">Mail</span>
+                            <span class="outlook-tab">Calendar</span>
+                            <span class="outlook-tab">People</span>
+                        </div>
+                    </div>
+                    <div class="outlook-body">
+                        <div class="outlook-sidebar">
+                            <div class="folder-item active"><span class="folder-icon">📥</span>Inbox</div>
+                            <div class="folder-item"><span class="folder-icon">📤</span>Sent Items</div>
+                            <div class="folder-item"><span class="folder-icon">📝</span>Drafts</div>
+                        </div>
+                        <div class="outlook-main">
+                            <div class="email-thread-header">
+                                <div class="email-subject">Re: Ski Trip Planning - Jan 10-14th</div>
+                                <div class="email-participants">Ross Berthelot → Group</div>
+                            </div>
+                            <div class="email-thread-content">
+                                <div class="email-message">
+                                    <div class="email-message-header">
+                                        <div class="email-avatar sender1">RB</div>
+                                        <div class="email-sender-info">
+                                            <div class="email-sender-name">Ross Berthelot</div>
+                                            <div class="email-sender-address">ross_berthelot@bankone.com</div>
+                                        </div>
+                                        <div class="email-timestamp">Dec 2001</div>
+                                    </div>
+                                    <div class="email-body-text expandable-content" id="email-thread-1">
+                                        <p>Lenny! jumping in the conversation without missing a beat....good to have you with us. Nice comedy....but the only fat, bald 30 year old is the Dogger. (just kidding dog, you's not fat....you's just fluffy). Don is bald, but not fat. Roby is balding, but just a little "stocky". Clint has a belly, but is not balding. Other than that, we are all pretty normal (please use that term loosely).</p>
+                                        <p style="margin-top: 8px;">Your parents would love to have us at their crib. Dog could rummage through all of your belongings, eat all of your parents' food, and wake them up at the ass crack of dawn with scrambled eggs and jumby. Roby could show your mom "a good time". Porteous, Clay, and Myers could talk to your dad about his company's legal shortcomings...</p>
+                                        <p style="margin-top: 8px;">Porthole....see if Timmy, Tricia, Mike Thomas, etc. would be interested in going on the trip...Lenny....see about all of your Houston Fiji buddies (house bitch, Tim, Val, etc.). Tell Tim we'll let him bring his new wife with him, too.</p>
+                                        <p style="margin-top: 8px;">Anyone else we can think of who might be interested in this trip (Jan 10 - 14th)?</p>
+                                    </div>
+                                    <button class="expand-btn" onclick="toggleExpand('email-thread-1', this)">
+                                        <span>Show more</span>
+                                        <span class="arrow">▼</span>
+                                    </button>
+                                </div>
+
+                                <div class="email-ground-truth">
+                                    <div class="email-persona-box">
+                                        <strong>👤 Responder Profile:</strong>
+                                        <div class="expandable-content" id="persona-email-1">
+                                            <strong>Demographics:</strong> Works at Enron, involved in hiring ('enron is looking for a ton of people').<br><br>
+                                            <strong>Interests:</strong> Social gatherings and weekend activities ('i am up for it. should be a good weekend to live it up'). Travel and destination events (discussing Cayman Islands and Miami for wedding). Nightlife and entertainment ('i just think miami will be a better night life'). Sports, particularly hockey. Shooting range activities. Crawfish boils and regional food culture. Austin entertainment scene (enthusiastic about 'party on 6th street in Austin'). Wedding planning and social events.<br><br>
+                                            <strong>Values:</strong> Cost-consciousness in decision making. Maintaining personal relationships. Helping friends with career opportunities. Openness to new experiences. Appreciation for laid-back atmospheres. Prioritizing social experiences and fun. Direct and honest communication.<br><br>
+                                            <strong>Communication:</strong> Consistently uses lowercase letters, even at sentence beginnings. Casual and conversational tone throughout. Short, direct sentences with minimal complex structure. Uses informal expressions and slang ('will rock', 'spilled the beans', 'live it up'). Minimal punctuation, often omitting proper capitalization. Uses contractions frequently ('i'm', 'i'll', 'you're').
+                                        </div>
+                                    </div>
+                                    <button class="expand-btn" onclick="toggleExpand('persona-email-1', this)">
+                                        <span>Show more</span>
+                                        <span class="arrow">▼</span>
+                                    </button>
+                                    <div class="ground-truth-label" style="margin-top: 12px;">Ground Truth Reply</div>
+                                    <div class="email-body-text" style="padding-left: 0;">
+                                        <p>thanks for including me. i don't think i will be able to make a ski trip durning that period. i have to go to miami and party on south beach. sorry. maybe if something was scheduled around spring skiing (feb-mar) i could definately go.</p>
+                                        <p style="margin-top: 8px;">robicheaux is bald? i remember that bastard was so hairy when i was living with him. i used to have to shave the soap in the shower after he used it.</p>
+                                        <p style="margin-top: 8px;">i know some of the houston guys would like to go skiing so keep us informed.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-divider"><span>Example 2</span></div>
+
+                <!-- Example 2 (was Example 1 - Holiday Wishes) -->
+                <div class="outlook-window">
+                    <div class="outlook-toolbar">
+                        <div class="outlook-logo">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.27 5.1 7.63 12 4.18zM4 16.54V9.09l7 3.5v7.45l-7-3.5zm9 3.5v-7.45l7-3.5v7.45l-7 3.5z"/></svg>
+                            Outlook
+                        </div>
+                        <div class="outlook-tabs">
+                            <span class="outlook-tab active">Mail</span>
+                            <span class="outlook-tab">Calendar</span>
+                            <span class="outlook-tab">People</span>
+                        </div>
+                    </div>
+                    <div class="outlook-body">
+                        <div class="outlook-sidebar">
+                            <div class="folder-item active"><span class="folder-icon">📥</span>Inbox</div>
+                            <div class="folder-item"><span class="folder-icon">📤</span>Sent Items</div>
+                            <div class="folder-item"><span class="folder-icon">📝</span>Drafts</div>
+                        </div>
+                        <div class="outlook-main">
+                            <div class="email-thread-header">
+                                <div class="email-subject">Holiday Wishes</div>
+                                <div class="email-participants">Candice Kao → Vince</div>
+                            </div>
+                            <div class="email-thread-content">
+                                <div class="email-message">
+                                    <div class="email-message-header">
+                                        <div class="email-avatar sender1">CK</div>
+                                        <div class="email-sender-info">
+                                            <div class="email-sender-name">Candice Kao</div>
+                                            <div class="email-sender-address">cgkao@mtholyoke.edu</div>
+                                        </div>
+                                        <div class="email-timestamp">Dec 2001</div>
+                                    </div>
+                                    <div class="email-body-text">
+                                        <p>Hi Vince,</p>
+                                        <p style="margin-top: 8px;">How are you? I hope you are doing well. I understand that Enron has been facing many difficulties but I hope the group and everyone else is doing alright. Well, i just wanted to wish you and your family a safe and happy holiday.</p>
+                                        <p style="margin-top: 12px;">Sincerely,<br>Candice Kao</p>
+                                    </div>
+                                </div>
+
+                                <div class="email-ground-truth">
+                                    <div class="email-persona-box">
+                                        <strong>👤 Responder Profile:</strong>
+                                        <div class="expandable-content" id="persona-email-2">
+                                            <strong>Demographics:</strong> Male (referred to as 'Vince'). Location: Houston. Senior Manager/Executive at Enron (makes PRC decisions, has direct reports). Has administrative support (directs 'Shirley' to add items to calendar).<br><br>
+                                            <strong>Interests:</strong> Human resources and employee classification decisions. Personnel review and ranking processes. Risk management and algorithmic solutions. MBA recruitment and university relations. Technical presentations and learning. Professional networking and vendor relationships. Analyst and associate programs.<br><br>
+                                            <strong>Values:</strong> Efficiency and brevity in communication (all responses under 25 words). Proper delegation and organizational hierarchy. Decisiveness in management. Professional courtesy and gratitude (consistently uses 'Thanks'). Humility and self-awareness (acknowledges 'I am becoming an old man'). Accessibility to external partners. Continuous learning and development.<br><br>
+                                            <strong>Communication:</strong> Extremely concise responses averaging 10-15 words per message. Consistent single-word signature 'Vince' without title. Direct, declarative statements without elaboration. Action-oriented language with clear directives. Professional but warm tone. Minimal use of punctuation and formatting. Frequent use of gratitude expressions. No use of greetings or closings beyond name signature.
+                                        </div>
+                                    </div>
+                                    <button class="expand-btn" onclick="toggleExpand('persona-email-2', this)">
+                                        <span>Show more</span>
+                                        <span class="arrow">▼</span>
+                                    </button>
+                                    <div class="ground-truth-label" style="margin-top: 12px;">Ground Truth Reply</div>
+                                    <div class="email-body-text" style="padding-left: 0;">
+                                        <p>Candice,</p>
+                                        <p style="margin-top: 8px;">Thanks a lot. So far, we are intact as a group but not for long. The best holiday wishes to you and your family.</p>
+                                        <p style="margin-top: 12px;">Vince</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>HUMANUAL Benchmark · Data Examples</p>
+        </div>
+    </footer>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const sections = document.querySelectorAll('.dataset-section');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const dataset = tab.dataset.dataset;
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                sections.forEach(s => {
+                    s.classList.remove('active');
+                    if (s.dataset.dataset === dataset) s.classList.add('active');
+                });
+            });
+        });
+
+        function toggleExpand(contentId, button) {
+            const content = document.getElementById(contentId);
+            const isExpanded = content.classList.contains('expanded');
+            
+            if (isExpanded) {
+                content.classList.remove('expanded');
+                button.classList.remove('expanded');
+                button.querySelector('span:first-child').textContent = 'Show more';
+            } else {
+                content.classList.add('expanded');
+                button.classList.add('expanded');
+                button.querySelector('span:first-child').textContent = 'Show less';
+            }
+        }
+    </script>
+</body>
+</html>
